@@ -1,0 +1,11 @@
+window.ZH={"Overview":"概览","AI compute":"AI算力","Muse":"Muse模型","Key people":"关键人物","13F hedge funds":"13F对冲基金",
+"What changed this week":"本周变化","Key numbers (Q2 2026, Meta press release)":"关键数据（2026年第二季度，Meta新闻稿）",
+"Q2 2026 revenue":"2026年Q2营收","Q2 2026 capex incl. finance leases":"2026年Q2资本开支（含融资租赁）","Q2 2026 free cash flow":"2026年Q2自由现金流","FY2026 capex guide":"2026全年资本开支指引","Q3 2026 revenue guide":"2026年Q3营收指引","Family DAP (Jun 2026)":"家族日活人数（2026年6月）",
+"Quarterly capex (SEC XBRL)":"季度资本开支（SEC XBRL）","Purchases of property & equipment":"购置物业及设备","Finance-lease principal payments":"融资租赁本金支付",
+"FY2026 capex guidance history":"2026全年资本开支指引变化","Data-centre power projects":"数据中心电力项目","GPU counts":"GPU数量","Compute deals":"算力合作协议",
+"Date":"日期","Event":"事件","Range (US$bn)":"区间（十亿美元）","Source":"来源","Site":"园区","Location":"地点","Power":"电力","Status":"状态","Counterparty":"合作方","Deal":"协议内容","Value (US$bn)":"金额（十亿美元）",
+"Muse timeline":"Muse发布时间线","Model":"模型","What it is":"简介","Benchmarks":"基准测试","What is Muse?":"Muse是什么？",
+"Verified quotes only: official transcripts, press releases and verified X accounts. Each is dated and linked.":"仅引用经核实来源：官方电话会实录、新闻稿和认证X账号，均注明日期和链接。",
+"Fund":"基金","Shares":"股数","Value":"市值","Change q/q":"环比变化","META shares held by quarter (as of quarter-end)":"各季度末持有的META股数",
+"Sold out":"清仓","New":"新建仓","n/a":"无数据","Built":"生成于","Not published · local preview":"未发布 · 本地预览",
+"Not held":"未持有","Options":"期权","Financials":"财务","AI products":"AI产品与战略","Legal & regulatory":"法律与监管","Q3 2026 earnings preview":"2026年Q3财报前瞻","Metric":"指标","Company guidance":"公司指引","Consensus":"市场一致预期","Actual":"实际","Revenue":"营收","EPS (diluted)":"稀释每股收益","Capex (quarter)":"季度资本开支","FY2026 total expenses":"2026全年总费用","Reality Labs operating loss":"Reality Labs经营亏损","Free cash flow":"自由现金流","2027 capex":"2027年资本开支","Segments: revenue":"分部营收","Segments: operating income":"分部经营利润","Ad metrics (y/y)":"广告指标（同比）","Free cash flow, buybacks & dividends":"自由现金流、回购与股息","Matter":"事项","Llama → Muse":"从Llama到Muse","Open vs closed policy":"开源与闭源策略","Meta AI usage":"Meta AI使用量","AI glasses":"AI眼镜","Meta Compute":"Meta算力业务"};
