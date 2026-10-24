@@ -2,7 +2,7 @@
 <title>Meta Platforms (META) Dashboard · © 2026 Hugo Tian</title><meta name="author" content="Hugo Tian">
 <link rel="icon" type="image/png" href="favicon.png"><link rel="apple-touch-icon" href="icon-180.png">
 <script>(function(){var h=document.documentElement,l=null;try{var t=localStorage.getItem('meta-theme');if(t==='light'||t==='dark')h.dataset.theme=t;}catch(e){}try{l=localStorage.getItem('meta-lang')}catch(e){}var q=location.search.match(/lang=(en|zh)/);if(q)l=q[1];if(l!=='en'&&l!=='zh')l=/^zh/i.test(navigator.language||'')?'zh':'en';h.dataset.lang=l;h.lang=l==='zh'?'zh-CN':'en'})();</script>
-<script src="vendor/chart.umd.min.js"></script><script src="data.js?v=1792715591"></script><script src="zh.js?v=1792715591"></script>
+<script src="vendor/chart.umd.min.js"></script><script src="data.js?v=1792815031"></script><script src="zh.js?v=1792815031"></script>
 <style>
 :root{--font:-apple-system,BlinkMacSystemFont,"SF Pro Text","Helvetica Neue",Arial,"PingFang SC","Noto Sans CJK SC",sans-serif;--bg:#f5f5f7;--panel:#fff;--txt:#1d1d1f;--mut:#6e6e73;--line:rgba(0,0,0,.08);--acc:#0064E0;--accsoft:rgba(8,102,255,.08);--pos:#1d8a3a;--neg:#d70015;--glass:rgba(251,251,253,.85)}
 @media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#000;--panel:#161617;--txt:#f5f5f7;--mut:#a1a1a6;--line:rgba(255,255,255,.1);--acc:#4aa3ff;--accsoft:rgba(74,163,255,.14);--pos:#30d158;--neg:#ff453a;--glass:rgba(22,22,23,.8)}}:root[data-theme=dark]{--bg:#000;--panel:#161617;--txt:#f5f5f7;--mut:#a1a1a6;--line:rgba(255,255,255,.1);--acc:#4aa3ff;--accsoft:rgba(74,163,255,.14);--pos:#30d158;--neg:#ff453a;--glass:rgba(22,22,23,.8)}
@@ -134,7 +134,7 @@ const STAT={REG_MKT:['Regular session','常规交易时段'],PRE_MKT:['Pre-marke
 function peHTML(){const q=Q.d,z=L()==='zh';if(!q)return 'P/E — · '+(z?'预测':'fwd')+' P/E —';const n=v=>{const x=parseFloat(v);return isFinite(x)?x:null},px=livePx()??n(q.last),te=n(q.eps),fe=n(q.feps);
  const pe=(px&&te?px/te:n(q.pe)),fpe=(px&&fe?px/fe:n(q.fpe)),f=v=>v==null?'n/a':v.toFixed(1)+'x';
  return `${z?'市盈率':'P/E'} ${f(pe)}${te?` <span class="src">(EPS $${te})</span>`:''} · ${z?'预测市盈率':'fwd P/E'} ${f(fpe)}${fe?` <span class="src">(EPS $${fe})</span>`:''}`}
-const WURL='https://micron-dashboard.cashcache.workers.dev/api/quote?symbol=META';const W={d:null,err:null,at:0};
+const WURL=null;/* own feed: CNBC direct; Micron worker dependency removed per Hugo */const W={d:null,err:null,at:0};
 const WLAB={Regular:'常规交易','Pre-market':'盘前','After-hours':'盘后',Overnight:'夜盘'};
 function livePx(){return W.d?W.d.main.price:(Q.d?parseFloat(Q.d.last):null)}
 function quoteHTML(){const z=L()==='zh';
@@ -145,7 +145,7 @@ function quoteHTML(){const z=L()==='zh';
  const q=Q.d,c=parseFloat(q.change),cls=c>=0?'pos':'neg',st=STAT[q.curmktstatus]||[q.curmktstatus,q.curmktstatus],x=q.ExtendedMktQuote;
  return `<div class="lq"><span class="px">$${q.last}</span><span class="ch ${cls}">${q.change} (${q.change_pct})</span><span class="src">${z?st[1]:st[0]}${x?` · ${STAT[x.type]?(z?STAT[x.type][1]:STAT[x.type][0]):x.type} $${x.last} <span class="${parseFloat(x.change)>=0?'pos':'neg'}">${x.change} (${x.change_pct})</span>`:''}</span></div>
  <p class="src">${z?'更新于':'Updated'} ${sgt(Q.at)} SGT · ${z?'最后成交日':'last trade date'} ${q.last_timedate} · ${z?'来源':'Source'}: <a href="https://www.cnbc.com/quotes/META" target="_blank" rel="noopener">CNBC quote feed</a> (${q.source}; ${q.realTime==='true'?(z?'实时':'real-time'):(z?'可能延迟':'may be delayed')}) · ${z?'每15秒刷新':'refreshes every 15 s'}${Q.err?(z?' · 最近一次有效数据，重试中':' · last good update, retrying'):''}</p>`}
-async function pollW(){try{const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),8000);const r=await fetch(WURL+'&t='+Date.now(),{cache:'no-store',signal:ctl.signal});clearTimeout(to);const j=await r.json();if(!j||!j.ok||!j.main||!j.main.price)throw new Error('bad');W.d=j;W.err=null;W.at=Date.now()}catch(e){W.err=String(e)}}
+async function pollW(){if(!WURL)return;try{const ctl=new AbortController(),to=setTimeout(()=>ctl.abort(),8000);const r=await fetch(WURL+'&t='+Date.now(),{cache:'no-store',signal:ctl.signal});clearTimeout(to);const j=await r.json();if(!j||!j.ok||!j.main||!j.main.price)throw new Error('bad');W.d=j;W.err=null;W.at=Date.now()}catch(e){W.err=String(e)}}
 async function pollQuote(){await pollW();try{const r=await fetch(QURL,{cache:'no-store'});const j=await r.json();const q=j.FormattedQuoteResult.FormattedQuote[0];if(!q||!q.last)throw new Error('empty');Q.d=q;Q.err=null;Q.at=Date.now()}catch(e){Q.err=String(e)}const el=document.getElementById('lq');if(el)el.innerHTML=quoteHTML();const mc=document.getElementById('mcap');if(mc&&Q.d){mc.textContent=Q.d.mktcapView;const pe=document.getElementById('pe');if(pe)pe.innerHTML=peHTML();const so=document.getElementById('shout');if(so)so.textContent=T('Shares out')+' '+Q.d.sharesout}}
 setInterval(()=>{if(!document.hidden)pollQuote()},15000);
 const isDark=()=>{const t=document.documentElement.dataset.theme;return t?t==='dark':matchMedia('(prefers-color-scheme: dark)').matches};
